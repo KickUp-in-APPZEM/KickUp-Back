@@ -21,11 +21,9 @@ public class AlarmController {
     private final AlarmService alarmService;
 
     @PostMapping
-    public ResponseEntity<Alarm> save(@RequestBody Alarm alarm,
-                                      @RequestParam(value = "mp3File", required = false) MultipartFile mp3File) throws IOException {
-        // 서비스에서 알람 저장
+    public ResponseEntity<Alarm> save(@RequestPart("alarm") Alarm alarm,
+                                      @RequestPart(value = "mp3File", required = false) MultipartFile mp3File) throws IOException {
         Alarm savedAlarm = alarmService.save(alarm, mp3File);
-
         return ResponseEntity.ok(savedAlarm);
     }
 

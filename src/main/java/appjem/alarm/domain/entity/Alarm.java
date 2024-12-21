@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private LocalTime time;
 
@@ -25,18 +25,22 @@ public class Alarm {
     private byte[] mp3Data;
 
     @Builder
-    public Alarm(LocalTime time, String title, byte[] mp3Data){
+    public Alarm(LocalTime time, String title, byte[] mp3Data) {
         this.time = time;
         this.title = title;
         this.mp3Data = mp3Data;
     }
 
-    public void changeActive(){
+    public void changeActive() {
         this.active = !this.active;
     }
 
-    public void update(LocalTime time, String title){
+    public void update(LocalTime time, String title) {
         this.time = time;
         this.title = title;
+    }
+
+    public void setMp3Data(byte[] mp3Data) {
+        this.mp3Data = mp3Data;
     }
 }

@@ -25,18 +25,10 @@ public class AlarmService {
     private final AlarmRepository alarmRepository;
 
     public Alarm save(Alarm alarm, MultipartFile mp3File) throws IOException {
-        byte[] mp3Data = null;
         if (mp3File != null && !mp3File.isEmpty()) {
-            mp3Data = mp3File.getBytes();
+            alarm.setMp3Data(mp3File.getBytes());
         }
-
-        Alarm newAlarm = Alarm.builder()
-                .time(alarm.getTime())
-                .title(alarm.getTitle())
-                .mp3Data(mp3Data)
-                .build();
-
-        return alarmRepository.save(newAlarm);
+        return alarmRepository.save(alarm);
     }
 
     public List<Alarm> findAll() {
@@ -44,24 +36,23 @@ public class AlarmService {
     }
 
     public Alarm findById(Long id) {
-        return alarmRepository.findById(id).orElse(null);
+        return alarmRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Alarm not found"));
     }
 
     @Transactional
-    public void changeActive(Long id){
+    public void changeActive(Long id) {
         Alarm alarm = findById(id);
         alarm.changeActive();
     }
 
     @Transactional
-    public void delete(Long id){
+    public void delete(Long id) {
         alarmRepository.deleteById(id);
     }
 
     @Transactional
-    public Alarm update(UpdateAlarmRequest request){
-        Alarm alarm = alarmRepository.findById(request.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Alarm not found"));
+    public Alarm update(UpdateAlarmRequest request) {
+        Alarm alarm = findById(request.getId());
         alarm.update(request.getTime(), request.getTitle());
         return alarmRepository.save(alarm);
     }
@@ -70,12 +61,16 @@ public class AlarmService {
     public void checkAlarms() {
         LocalTime currentTime = LocalTime.now();
         List<Alarm> alarms = alarmRepository.findAll();
-
         for (Alarm alarm : alarms) {
-            if (alarm.getTime().equals(currentTime)) {
+            if (isTimeToTrigger(alarm.getTime(), currentTime)) {
                 triggerAlarm(alarm);
             }
         }
+    }
+
+    private boolean isTimeToTrigger(LocalTime alarmTime, LocalTime currentTime) {
+        return alarmTime.getHour() == currentTime.getHour() &&
+                alarmTime.getMinute() == currentTime.getMinute();
     }
 
     private void triggerAlarm(Alarm alarm) {
