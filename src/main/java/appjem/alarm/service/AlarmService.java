@@ -73,12 +73,12 @@ public class AlarmService {
         }
     }
 
-    private boolean isTimeToTrigger(LocalTime alarmTime, LocalTime currentTime) {
+    public boolean isTimeToTrigger(LocalTime alarmTime, LocalTime currentTime) {
         return alarmTime.getHour() == currentTime.getHour() &&
                 alarmTime.getMinute() == currentTime.getMinute();
     }
 
-    private void triggerAlarm(Alarm alarm) {
+    public void triggerAlarm(Alarm alarm) {
         System.out.println("알람 울림: " + alarm.getTitle() + " - " + alarm.getTime());
         try {
             byte[] mp3Data = alarm.getMp3Data();
