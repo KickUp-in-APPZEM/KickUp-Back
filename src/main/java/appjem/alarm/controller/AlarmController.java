@@ -5,6 +5,7 @@ import appjem.alarm.domain.entity.Alarm;
 import appjem.alarm.service.AlarmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +21,7 @@ public class AlarmController {
 
     private final AlarmService alarmService;
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Alarm> save(@RequestPart("alarm") Alarm alarm,
                                       @RequestPart(value = "mp3File", required = false) MultipartFile mp3File) throws IOException {
         log.info("알람 데이터: {}", alarm);
