@@ -26,7 +26,11 @@ public class AlarmService {
 
     public Alarm save(Alarm alarm, MultipartFile mp3File) throws IOException {
         if (mp3File != null && !mp3File.isEmpty()) {
-            alarm.setMp3Data(mp3File.getBytes());
+            try {
+                alarm.setMp3Data(mp3File.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException("파일 처리 중 오류가 발생했습니다.", e);
+            }
         }
         return alarmRepository.save(alarm);
     }
