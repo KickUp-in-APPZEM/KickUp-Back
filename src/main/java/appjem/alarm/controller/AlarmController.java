@@ -39,7 +39,7 @@ public class AlarmController {
         return alarmService.findById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/activate")
     public ResponseEntity<String> changeActive(@PathVariable Long id) {
         log.info("Change active for Alarm ID: {}", id);
         alarmService.changeActive(id);
