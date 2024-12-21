@@ -1,5 +1,6 @@
 package appjem.alarm.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,7 @@ public class Alarm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
 
     private boolean active = true;
