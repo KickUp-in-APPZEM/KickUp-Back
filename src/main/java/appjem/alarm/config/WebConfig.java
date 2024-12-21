@@ -1,4 +1,4 @@
-package appjem.alarm;
+package appjem.alarm.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -1,9 +1,6 @@
 package appjem.alarm.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,10 +21,14 @@ public class Alarm {
 
     private String title;
 
+    @Lob
+    private byte[] mp3Data;
+
     @Builder
-    public Alarm(LocalTime time, String title){
+    public Alarm(LocalTime time, String title, byte[] mp3Data){
         this.time = time;
         this.title = title;
+        this.mp3Data = mp3Data;
     }
 
     public void changeActive(){
