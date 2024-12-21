@@ -21,12 +21,11 @@ public class AlarmController {
     private final AlarmService alarmService;
 
     @PostMapping
-    public ResponseEntity<Alarm> save(@RequestPart("alarm") Alarm alarm,
+    public ResponseEntity<Alarm> save(@RequestBody Alarm alarm,
                                       @RequestPart(value = "mp3File", required = false) MultipartFile mp3File) throws IOException {
         Alarm savedAlarm = alarmService.save(alarm, mp3File);
         return ResponseEntity.ok(savedAlarm);
     }
-
     @GetMapping
     public List<Alarm> getAll() {
         return alarmService.findAll();
