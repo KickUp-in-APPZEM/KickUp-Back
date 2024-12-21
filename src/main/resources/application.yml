@@ -18,3 +18,8 @@ spring:
         hibernate:
           SQL: debug
           type: trace
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
