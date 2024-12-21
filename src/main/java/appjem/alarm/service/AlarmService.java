@@ -1,7 +1,7 @@
-package appjem.alarm.Service;
+package appjem.alarm.service;
 
-import appjem.alarm.Domain.Alarm;
-import appjem.alarm.Domain.AlarmRepository;
+import appjem.alarm.domain.entity.Alarm;
+import appjem.alarm.domain.repository.AlarmRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

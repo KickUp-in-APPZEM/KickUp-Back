@@ -1,7 +1,7 @@
-package appjem.alarm.Controller;
+package appjem.alarm.controller;
 
-import appjem.alarm.Domain.Alarm;
-import appjem.alarm.Service.AlarmService;
+import appjem.alarm.domain.entity.Alarm;
+import appjem.alarm.service.AlarmService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

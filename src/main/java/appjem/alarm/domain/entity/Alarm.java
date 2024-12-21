@@ -1,4 +1,4 @@
-package appjem.alarm.Domain;
+package appjem.alarm.domain.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
