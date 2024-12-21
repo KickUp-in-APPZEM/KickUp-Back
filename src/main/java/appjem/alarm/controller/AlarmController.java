@@ -74,23 +74,4 @@ public class AlarmController {
     public void checkAlarms() {
         alarmService.checkAlarms();
     }
-
-    @GetMapping("/check")
-    public String checkAlarmsNow() {
-        LocalTime currentTime = LocalTime.now();
-        List<Alarm> alarms = alarmService.findAll();
-        StringBuilder result = new StringBuilder();
-
-        for (Alarm alarm : alarms) {
-            if (alarmService.isTimeToTrigger(alarm.getTime(), currentTime)) {
-                alarmService.triggerAlarm(alarm);
-                result.append("알람 울림: ").append(alarm.getTitle()).append("\n");
-            }
-        }
-
-        if (result.length() == 0) {
-            return "현재 울릴 알람이 없습니다.";
-        }
-        return result.toString();
-    }
 }
