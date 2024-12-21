@@ -23,6 +23,11 @@ public class AlarmController {
     @PostMapping
     public ResponseEntity<Alarm> save(@RequestBody Alarm alarm,
                                       @RequestPart(value = "mp3File", required = false) MultipartFile mp3File) throws IOException {
+        if (mp3File == null) {
+            log.error("파일이 전송되지 않았습니다.");
+        } else {
+            log.info("파일이 전송되었습니다: " + mp3File.getOriginalFilename());
+        }
         Alarm savedAlarm = alarmService.save(alarm, mp3File);
         return ResponseEntity.ok(savedAlarm);
     }
