@@ -1,5 +1,6 @@
 package appjem.alarm.controller;
 
+import appjem.alarm.domain.AnswerRequest;
 import appjem.alarm.domain.entity.Mission;
 import appjem.alarm.domain.repository.RandomMissionReposity;
 import appjem.alarm.service.RandomMissionService;
@@ -21,12 +22,13 @@ public class MissionController {
     }
 
     @PostMapping("/check")
-    public boolean checkAnswer(@RequestParam String userAnswer, @RequestParam Long id) {
-        Mission mission = randomMissionRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Mission not found with id: " + id));
+    public boolean checkAnswer(@RequestBody AnswerRequest request) {
+        Mission mission = randomMissionRepository.findById(request.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Mission not found with id: " + request.getId()));
 
-        return missionService.checkAnswer(mission, userAnswer); // checkAnswer 메서드가 서비스에서 구현되어야 합니다.
+        return missionService.checkAnswer(mission, request.getUserAnswer());
     }
+
 
 }
 
