@@ -23,14 +23,11 @@ public class Alarm {
 
     private String title;
 
-    @Lob
-    private byte[] mp3Data;
 
     @Builder
-    public Alarm(LocalTime time, String title, byte[] mp3Data) {
+    public Alarm(LocalTime time, String title) {
         this.time = time;
         this.title = title;
-        this.mp3Data = mp3Data;
     }
 
     public void changeActive() {
@@ -40,9 +37,5 @@ public class Alarm {
     public void update(LocalTime time, String title) {
         this.time = time;
         this.title = title;
-    }
-
-    public void setMp3Data(byte[] mp3Data) {
-        this.mp3Data = mp3Data;
     }
 }

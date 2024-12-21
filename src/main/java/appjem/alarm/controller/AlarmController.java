@@ -9,10 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -23,17 +19,9 @@ public class AlarmController {
 
     private final AlarmService alarmService;
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Alarm> save(@RequestPart("alarm") Alarm alarm,
-                                      @RequestPart(value = "mp3File", required = false) MultipartFile mp3File) throws IOException {
-        log.info("알람 데이터: {}", alarm);
-        if (mp3File == null || mp3File.isEmpty()) {
-            log.warn("파일이 전송되지 않았습니다.");
-        } else {
-            log.info("파일 전송됨: {}", mp3File.getOriginalFilename());
-        }
-
-        Alarm savedAlarm = alarmService.save(alarm, mp3File);
+    @PostMapping
+    public ResponseEntity<Alarm> save(@RequestBody Alarm alarm){
+        Alarm savedAlarm = alarmService.save(alarm);
         return ResponseEntity.ok(savedAlarm);
     }
 
