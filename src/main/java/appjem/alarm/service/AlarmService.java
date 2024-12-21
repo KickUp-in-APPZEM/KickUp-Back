@@ -47,7 +47,8 @@ public class AlarmService {
 
     @Transactional
     public void delete(Long id) {
-        alarmRepository.deleteById(id);
+        Alarm alarm = findById(id);
+        alarmRepository.delete(alarm);
     }
 
     @Transactional

@@ -46,8 +46,12 @@ public class AlarmController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
-        alarmService.delete(id);
-        return ResponseEntity.ok("삭제완료");
+        try {
+            alarmService.delete(id);
+            return ResponseEntity.ok("삭제완료");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).body("알람을 찾을 수 없습니다.");
+        }
     }
 
     @PutMapping("/{id}")
