@@ -32,6 +32,7 @@ public class AlarmController {
         return ResponseEntity.ok(savedAlarm);
     }
 
+
     @GetMapping
     public List<Alarm> getAll() {
         return alarmService.findAll();
