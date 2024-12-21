@@ -33,4 +33,9 @@ public class Alarm {
     public void changeActive(){
         this.active = !this.active;
     }
+
+    public void update(LocalTime time, String title){
+        this.time = time;
+        this.title = title;
+    }
 }

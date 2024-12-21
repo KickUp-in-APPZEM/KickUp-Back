@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -41,5 +42,15 @@ public class AlarmService {
     @Transactional
     public void delete(Long id){
         alarmRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void update(Long id, LocalTime time, String title){
+        Alarm alarm = findById(id);
+        if(alarm != null){
+            alarm.update(time, title);
+        }else{
+            throw new IllegalArgumentException("존재하지 않는 알람입니다");
+        }
     }
 }
