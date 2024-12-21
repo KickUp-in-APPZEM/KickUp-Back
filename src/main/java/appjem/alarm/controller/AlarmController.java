@@ -1,5 +1,6 @@
 package appjem.alarm.controller;
 
+import appjem.alarm.domain.UpdateAlarmRequest;
 import appjem.alarm.domain.entity.Alarm;
 import appjem.alarm.service.AlarmService;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +44,10 @@ public class AlarmController {
     public ResponseEntity<String> delete(@PathVariable Long id) {
         alarmService.delete(id);
         return ResponseEntity.ok("삭제완료");
+    }
+
+    @PutMapping("/{id}")
+    public Alarm update(@RequestBody UpdateAlarmRequest request) {
+        return alarmService.update(request);
     }
 }

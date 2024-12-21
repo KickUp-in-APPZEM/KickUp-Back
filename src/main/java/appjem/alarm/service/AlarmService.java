@@ -1,5 +1,6 @@
 package appjem.alarm.service;
 
+import appjem.alarm.domain.UpdateAlarmRequest;
 import appjem.alarm.domain.entity.Alarm;
 import appjem.alarm.domain.repository.AlarmRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,12 +46,10 @@ public class AlarmService {
     }
 
     @Transactional
-    public void update(Long id, LocalTime time, String title){
-        Alarm alarm = findById(id);
-        if(alarm != null){
-            alarm.update(time, title);
-        }else{
-            throw new IllegalArgumentException("존재하지 않는 알람입니다");
-        }
+    public Alarm update(UpdateAlarmRequest request){
+        Alarm alarm = alarmRepository.findById(request.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Alarm not found"));
+        alarm.update(request.getTime(), request.getTitle());
+        return alarmRepository.save(alarm);
     }
 }
