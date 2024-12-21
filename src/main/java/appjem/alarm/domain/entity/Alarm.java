@@ -16,7 +16,6 @@ public class Alarm {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(pattern = "HH:mm")
     private LocalTime time;
 
     private boolean active = true;
