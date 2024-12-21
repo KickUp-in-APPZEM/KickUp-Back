@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class MissionController {
 
     private final RandomMissionService missionService;
-    private final RandomMissionReposity randomMissionReposity;
+    private final RandomMissionReposity randomMissionRepository;
 
 
     @GetMapping("/random")
@@ -21,11 +21,11 @@ public class MissionController {
     }
 
     @PostMapping("/check")
-    public boolean checkAnswer(@RequestParam String userAnswer, @RequestParam Long missionId) {
-        Mission mission = randomMissionReposity.findById(missionId)
-                .orElseThrow(() -> new IllegalArgumentException("Mission not found with id: " + missionId));
+    public boolean checkAnswer(@RequestParam String userAnswer, @RequestParam Long id) {
+        Mission mission = randomMissionRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Mission not found with id: " + id));
 
-        return missionService.checkAnswer(mission, userAnswer);
+        return missionService.checkAnswer(mission, userAnswer); // checkAnswer 메서드가 서비스에서 구현되어야 합니다.
     }
 
 }
