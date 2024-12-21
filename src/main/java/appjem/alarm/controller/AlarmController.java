@@ -70,7 +70,7 @@ public class AlarmController {
         return alarmService.update(request);
     }
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 1000)
     public void checkAlarms() {
         alarmService.checkAlarms();
     }
