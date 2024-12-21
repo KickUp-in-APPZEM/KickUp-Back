@@ -38,4 +38,10 @@ public class AlarmController {
         alarmService.changeActive(id);
         return ResponseEntity.ok("변경완료");
     }
+
+    @DeleteMapping("{/id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        alarmService.delete(id);
+        return ResponseEntity.ok("삭제완료");
+    }
 }
